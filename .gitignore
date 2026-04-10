@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+.forensic_cache/
+.scraper_cache/
+.pytest_cache/
+.cache/
+
+# Databases
+*.db
+*.sqlite3
+
+# Environments
+venv/
+.venv/
+env/
+bin/
+lib/
+share/
+Include/
+pyvenv.cfg
+
+# Env / Secrets
+.env
+.flaskenv
+
+# Project specific
+backend/uploads/*
+backend/static/results/*
+frontend/node_modules/
+backend/logs/*
+logs/
+
+# Large binaries (Optional - can be adjusted)
+*.docx
+*.pptx
+*.pdf
+# Excluding large report files as requested to keep repo clean
+23A91F00D0.docx
+AI-Media-Detector (1).pdf
+review 1.pptx
+review 2.pptx
+REVIEW-3 (1).pptx
+
+# OS files
+.DS_Store
+Thumbs.db

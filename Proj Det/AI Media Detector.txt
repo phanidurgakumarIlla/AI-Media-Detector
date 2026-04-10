@@ -1,0 +1,87 @@
+AI Media Detector 
+
+----------------------------------------
+1. SYSTEM REQUIREMENTS
+----------------------------------------
+- Python 3.9 or above must be installed
+- Internet connection is required (for neural model verification)
+- pip should be working and updated
+
+----------------------------------------
+2. REQUIRED LIBRARIES INSTALLATION
+----------------------------------------
+Run these commands in VS Code Terminal or CMD:
+
+pip install fastapi uvicorn torch transformers opencv-python Pillow numpy yt-dlp
+
+OR (using requirements file):
+
+pip install -r requirements.txt
+
+----------------------------------------
+3. HOW TO RUN THE PROJECT
+----------------------------------------
+Step 1:
+Open VS Code / Terminal
+
+Step 2:
+Go to project folder
+cd "f:\Exp AI Dect\backend"
+
+Step 3:
+Run the project using Uvicorn
+uvicorn main:app --reload --port 8000
+
+Step 4:
+Open browser and go to:
+http://localhost:8000
+
+----------------------------------------
+HOW THE PROJECT WORKS
+----------------------------------------
+
+1. WELCOME & INTRO PAGE
+- When the website opens, a futuristic intro with an AI Robot is displayed.
+- Users can see features and general information about Deepfake detection.
+- Full access to the detector is restricted to members.
+
+2. REGISTER & LOGIN
+- Users must click "Enter Portal" to go to the Login page.
+- New users must Register first.
+- Secure JWT-based authentication allows full tool access.
+
+3. STRATEGY SELECTION
+- Once logged in, users can choose their "Detection Strategy":
+  1. Auto Cascade (Best for general video/audio analysis).
+  2. Keyword Tag (Strict metadata-based forensic check).
+
+4. MEDIA UPLOAD & LINK ANALYSIS
+- Users can Upload any media (Video, Audio, or Photo).
+- Users can also paste Social Links (Instagram Reels, YouTube).
+- The system eagerly warms up Neural Models (ViT) for instant results.
+
+5. FORENSIC PROCESSING
+- Phase 1: Metadata Signature Check (Viral Account Registry).
+- Phase 2: Neural Inference (Analyzing pixel-level textures).
+- Phase 3: Kinetic Analysis (Detecting plastic skin and rubbery motions).
+
+6. DETAILED FORENSIC REPORT
+- AI Probability score is displayed (e.g., 99% AI Generated).
+- A detailed "Forensic Heatmap" is generated using ELA/DCT Variance.
+- Robot Assistant provides specific "Guidance" about the detected artifacts.
+
+7. PERFORMANCE ANALYTICS
+- Advanced metrics (Precision, Recall, F1-Score) are shown.
+- Historical data and analysis performance are logged for review.
+
+----------------------------------------
+FINAL FLOW (SHORT)
+----------------------------------------
+1. Open Welcome Page
+2. Register & Login
+3. Upload Media or Paste Link
+4. Choose Detection Strategy
+5. System Performs Forensic Scan
+6. View AI Verdict (Real/AI)
+7. Check Forensic Heatmap & Stats
+----------------------------------------

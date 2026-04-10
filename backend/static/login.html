@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AI Media Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Apply theme immediately to prevent layout shift
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 10vh;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .auth-input:focus {
+            border-color: var(--accent-secondary);
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--accent-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1rem 0;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .divider:not(:empty)::before { margin-right: .5em; }
+        .divider:not(:empty)::after { margin-left: .5em; }
+
+        .google-btn {
+            background: white !important;
+            color: #3c4043 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 500 !important;
+            border: 1px solid #dadce0 !important;
+        }
+
+        .google-btn:hover {
+            background: #f8f9fa !important;
+            border-color: #d2e3fc !important;
+        }
+
+        .google-btn img {
+            width: 18px;
+            height: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <main class="animate-slide-up auth-container">
+        <header>
+            <h1 style="font-size: 2.5rem;">Access Portal</h1>
+            <p style="font-size: 1rem;">Authenticate to use the AI Detector</p>
+        </header>
+
+        <div class="auth-content-wrapper">
+            <div class="glass-panel">
+                <div class="tabs">
+                    <button id="tab-login" class="tab-btn active" style="flex: 1;">Login</button>
+                    <button id="tab-register" class="tab-btn" style="flex: 1;">Register</button>
+                </div>
+
+                <!-- Login Section -->
+                <div id="section-login" class="section active">
+                    <form id="form-login" class="auth-form" onsubmit="event.preventDefault();">
+                        <input type="text" id="login-username" class="auth-input" placeholder="Username" required>
+                        <input type="password" id="login-password" class="auth-input" placeholder="Password" required>
+                        <button type="submit" id="btn-login-submit" class="btn w-full">Sign In</button>
+                    </form>
+                    <div class="divider"><span>OR</span></div>
+                    <button class="btn w-full google-btn" id="btn-google-login">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                        Sign in with Google
+                    </button>
+                </div>
+
+                <!-- Register Section -->
+                <div id="section-register" class="section hidden">
+                    <div class="text-center">
+                        <span class="role-badge">First user registered becomes Admin automatically</span>
+                    </div>
+                    <form id="form-register" class="auth-form" onsubmit="event.preventDefault();">
+                        <input type="text" id="reg-username" class="auth-input" placeholder="Choose Username" required>
+                        <input type="email" id="reg-email" class="auth-input" placeholder="Enter Gmail" required>
+                        <input type="password" id="reg-password" class="auth-input" placeholder="Choose Password" required>
+                        <button type="submit" id="btn-reg-submit" class="btn w-full outline">Get Verification OTP</button>
+                    </form>
+                    <div class="divider"><span>OR</span></div>
+                    <button class="btn w-full google-btn" id="btn-google-reg">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                        Register with Google
+                    </button>
+                </div>
+
+                <!-- OTP Verification Section -->
+                <div id="section-otp" class="section hidden">
+                    <div class="text-center">
+                        <h3 style="margin-bottom: 0.5rem;">Verify Your Email</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">We've sent a 6-digit code to <br><strong id="display-email">your-email@gmail.com</strong></p>
+                    </div>
+                    <form id="form-otp" class="auth-form" onsubmit="event.preventDefault();">
+                        <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
+                            <input type="text" maxlength="6" id="otp-code" class="auth-input text-center" style="letter-spacing: 12px; font-size: 1.5rem; width: 220px;" placeholder="000000" required>
+                        </div>
+                        <button type="submit" id="btn-otp-verify" class="btn w-full">Verify & Continue</button>
+                        <button type="button" id="btn-otp-back" class="btn outline w-full" style="font-size: 0.8rem;">Back</button>
+                    </form>
+                </div>
+
+                <div id="auth-error" class="error-msg hidden" style="margin-top: 1.5rem;"></div>
+                <div id="auth-success" class="error-msg hidden"
+                    style="margin-top: 1.5rem; background: rgba(0, 230, 118, 0.1); border-color: var(--success); color: var(--success);">
+                </div>
+            </div>
+
+            <div class="robot-container">
+                <div class="robot" id="login-robot">
+                    <div class="robot-head">
+                        <div class="robot-face">
+                            <div class="robot-eye left">
+                                <div class="eye-pupil"></div>
+                            </div>
+                            <div class="robot-eye right">
+                                <div class="eye-pupil"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="robot-body">
+                        <div class="robot-chest"></div>
+                        <div class="robot-arm left"></div>
+                        <div class="robot-arm right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth_ui.js?v=3"></script>
+</body>
+
+</html>

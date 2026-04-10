@@ -1,0 +1,67 @@
+--- Slide ppt/slides/slide1.xml ---
+ShieldX
+ – Android Malware Detection System Using Machine Learning
+Presented By :  Y Srilatha
+Roll Number : 248905100033
+Course : MCA – Master of Computer Applications
+Guide Name: G . Sai Kireeti
+College Name: Aditya School of Computer Science
+
+--- Slide ppt/slides/slide2.xml ---
+Introduction
+Shield X is a web-based Android malware detection system that uses Machine Learning algorithms to identify malicious applications and threats.
+This system allows users to upload malware datasets, train ML models, and scan APK files, 
+wifi
+ networks, and suspicious messages.
+The project helps detect potential threats early and improves mobile security.
+Importance
+ Android malware attacks are increasing rapidly* 
+Users cannot easily identify malicious apps* 
+Machine Learning can detect hidden malware patterns
+
+--- Slide ppt/slides/slide3.xml ---
+Problem Statement
+Android devices are widely used, making them a major target for malware attacks.
+Many users unknowingly install malicious applications that steal personal data, track activities, or damage the system.
+Existing detection methods require technical knowledge or expensive security tools .
+Because of this, it becomes difficult for normal users to identify malware threats in APK files, 
+wifi
+ networks, or suspicious messages.
+Therefore, a smart and automated system is required to detect malware quickly and accurately.
+
+--- Slide ppt/slides/slide4.xml ---
+Existing System
+Currently, malware detection is mainly done using traditional antivirus applications . These systems detect malware using signature-based detection.
+Limitations of Existing System* 
+Cannot detect new or unknown malware* 
+Requires constant updates* 
+Limited threat analysis* Some systems are costly or complex( premium)
+Tools Used
+* Antivirus software* 
+Manual security analysis*
+ Static signature detection methods
+
+--- Slide ppt/slides/slide5.xml ---
+Proposed System
+Shield X uses Machine Learning algorithms to analyze application features and detect whether an application is safe or malicious . Unlike traditional antivirus systems that depend only on signature-based detection, the proposed system uses data-driven analysis to identify hidden malware patterns.
+APK file threat detection*
+ Suspicious 
+WiFi
+ network detection*
+ Malicious message analysis*
+ Algorithm comparison for better accuracy* 
+Dashboard for monitoring scan results
+Technologies Used 
+Python*
+ Flask Web Framework*
+ Machine Learning (Random Forest, Logistic Regression)*
+ HTML, CSS, JavaScript* ,SQLite Database
+
+--- Slide ppt/slides/slide6.xml ---
+Abstract
+The proposed project, 
+ShieldX
+ – Android Malware Detection System, aims to develop a smart web-based platform that detects malware using Machine Learning techniques. The system allows users to upload malware datasets, train machine learning models, and perform threat analysis through an interactive dashboard.
+The proposed solution uses machine learning algorithms such as Random Forest and Logistic Regression to analyze patterns in malware datasets and predict whether an application is malicious or safe. The platform also provides additional features such as scanning APK files, 
+WiFi
+ networks, and suspicious messages to detect potential threats.

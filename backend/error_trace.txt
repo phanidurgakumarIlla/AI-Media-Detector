@@ -1,0 +1,79 @@
+﻿backend\venv\Scripts\py
+thon.exe : 
+At line:1 char:1
++ backend\venv\Scripts\
+python.exe backend\trai
+n_finetune.py 2>&1 | 
+Out- ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (:String) [],    
+ RemoteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+Map:   0%|          | 
+0/2 [00:00<?, ? 
+examples/s]
+Map: 100%|##########| 
+2/2 [00:00<00:00,  
+3.28 examples/s]
+Map: 100%|##########| 
+2/2 [00:00<00:00,  
+3.26 examples/s]
+Warning: You are 
+sending 
+unauthenticated 
+requests to the HF 
+Hub. Please set a 
+HF_TOKEN to enable 
+higher rate limits and 
+faster downloads.
+
+Map:   0%|          | 
+0/2 [00:00<?, ? 
+examples/s]
+Map: 100%|##########| 
+2/2 [00:00<00:00, 
+18.03 examples/s]
+Map: 100%|##########| 
+2/2 [00:00<00:00, 
+17.66 examples/s]
+Traceback (most recent 
+call last):
+  File "E:\AI Dect\back
+end\train_finetune.py",
+ line 55, in <module>
+    
+print(f"\u26a0\ufe0f 
+Dataset too small 
+({len(dataset)} 
+samples). Disabling 
+evaluation and 
+saving.")
+    ~~~~~^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+^
+  File "C:\Users\dell\A
+ppData\Local\Programs\P
+ython\Python313\Lib\enc
+odings\cp1252.py", 
+line 19, in encode
+    return codecs.charm
+ap_encode(input,self.er
+rors,encoding_table)[0]
+           ~~~~~~~~~~~~
+~~~~~~~~~^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 
+'charmap' codec can't 
+encode characters in 
+position 0-1: 
+character maps to 
+<undefined>

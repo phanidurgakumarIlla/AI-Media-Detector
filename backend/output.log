@@ -1,0 +1,17 @@
+System.Management.Automation.RemoteException
+Map:   0%|          | 0/2 [00:00<?, ? examples/s]
+Map: 100%|##########| 2/2 [00:00<00:00,  3.41 examples/s]
+Map: 100%|##########| 2/2 [00:00<00:00,  3.39 examples/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+System.Management.Automation.RemoteException
+Map:   0%|          | 0/2 [00:00<?, ? examples/s]
+Map: 100%|##########| 2/2 [00:00<00:00, 13.76 examples/s]
+Map: 100%|##########| 2/2 [00:00<00:00, 13.12 examples/s]
+Traceback (most recent call last):
+  File "E:\AI Dect\backend\train_finetune.py", line 55, in <module>
+    print(f"\u26a0\ufe0f Dataset too small ({len(dataset)} samples). Disabling evaluation and saving.")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>

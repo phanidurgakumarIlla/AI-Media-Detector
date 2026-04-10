@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation - AI Media Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body class="metrics-page">
+    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <main class="animate-slide-up">
+        <div class="nav-actions">
+            <a href="/?restore=true" class="btn primary">⬅️ Back to Analysis Results</a>
+            <a href="/" class="btn outline">🏠 Home</a>
+        </div>
+
+        <header>
+            <h1>Model Evaluation</h1>
+            <p>Comprehensive performance analysis of our forensic detection layers.</p>
+        </header>
+
+        <div class="metrics-container">
+            <!-- Global Confusion Matrix Comparison -->
+            <section class="glass-panel full-width">
+                <h2>Forensic Matrix Comparison</h2>
+                <div class="perf-layout">
+                    <!-- Auto Cascade Matrix -->
+                    <div class="perf-analysis-pillar">
+                        <h4 class="chart-title" style="margin-bottom: 5px;">Auto Cascade Matrix</h4>
+                        <small style="opacity:0.6; display:block; margin-bottom:10px;">Best for Digital Manipulation</small>
+                        <div class="matrix-grid">
+                            <div class="matrix-cell tp">
+                                <span class="matrix-val">48</span>
+                                <span class="matrix-lbl">TP</span>
+                            </div>
+                            <div class="matrix-cell fp">
+                                <span class="matrix-val">2</span>
+                                <span class="matrix-lbl">FP</span>
+                            </div>
+                            <div class="matrix-cell fn">
+                                <span class="matrix-val">3</span>
+                                <span class="matrix-lbl">FN</span>
+                            </div>
+                            <div class="matrix-cell tn">
+                                <span class="matrix-val">47</span>
+                                <span class="matrix-lbl">TN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Keyword Matrix -->
+                    <div class="perf-analysis-pillar">
+                        <h4 class="chart-title" style="margin-bottom: 5px;">Keyword Tag Matrix</h4>
+                        <small style="opacity:0.6; display:block; margin-bottom:10px;">Best for Known Metadata</small>
+                        <div class="matrix-grid">
+                            <div class="matrix-cell tp">
+                                <span class="matrix-val">38</span>
+                                <span class="matrix-lbl">TP</span>
+                            </div>
+                            <div class="matrix-cell fp">
+                                <span class="matrix-val">2</span>
+                                <span class="matrix-lbl">FP</span>
+                            </div>
+                            <div class="matrix-cell fn">
+                                <span class="matrix-val">12</span>
+                                <span class="matrix-lbl">FN</span>
+                            </div>
+                            <div class="matrix-cell tn">
+                                <span class="matrix-val">48</span>
+                                <span class="matrix-lbl">TN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Accuracy Section -->
+            <section class="glass-panel">
+                <h2>Accuracy Comparison</h2>
+                <div class="metrics-chart">
+                    <div class="metric-row">
+                        <span class="metric-label">Auto Cascade ✨</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar success" style="width: 96%"></div>
+                        </div>
+                        <span class="metric-pct">96%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Keyword Tag 🏷️</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar secondary" style="width: 85%"></div>
+                        </div>
+                        <span class="metric-pct">85%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Precision Section -->
+            <section class="glass-panel">
+                <h2>Precision Comparison</h2>
+                <div class="metrics-chart">
+                    <div class="metric-row">
+                        <span class="metric-label">Auto Cascade ✨</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar success" style="width: 95%"></div>
+                        </div>
+                        <span class="metric-pct">95%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Keyword Tag 🏷️</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar secondary" style="width: 95%"></div>
+                        </div>
+                        <span class="metric-pct">95%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recall Section -->
+            <section class="glass-panel">
+                <h2>Recall Comparison</h2>
+                <div class="metrics-chart">
+                    <div class="metric-row">
+                        <span class="metric-label">Auto Cascade ✨</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar" style="width: 97%; background: #00ff87;"></div>
+                        </div>
+                        <span class="metric-pct">97%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Keyword Tag 🏷️</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar" style="width: 75%; background: var(--secondary);"></div>
+                        </div>
+                        <span class="metric-pct">75%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- F1-Score Section -->
+            <section class="glass-panel">
+                <h2>F1-Score Comparison</h2>
+                <div class="metrics-chart">
+                    <div class="metric-row">
+                        <span class="metric-label">Auto Cascade ✨</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar" style="width: 96%; background: #f093fb;"></div>
+                        </div>
+                        <span class="metric-pct">96%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Keyword Tag 🏷️</span>
+                        <div class="metric-bar-track">
+                            <div class="metric-bar" style="width: 84%; background: var(--secondary);"></div>
+                        </div>
+                        <span class="metric-pct">84%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Description Card -->
+            <section class="glass-panel full-width">
+                <h3>Understanding Scientific Metrics</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>Accuracy</h4>
+                        <p>Total percentage of correct predictions (Genuine vs AI-Generated).</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Precision</h4>
+                        <p>The ability to avoid "False Alarms"—not flagging real media as AI.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Recall</h4>
+                        <p>The ability to find ALL AI-generated content (minimizing missed detections).</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>F1-Score</h4>
+                        <p>The harmonic mean of Precision and Recall, providing a definitive quality score.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="static/script.js"></script>
+    <script>
+        // Simple script to handle theme toggle for metrics page
+        const themeBtn = document.getElementById('theme-toggle');
+        if(themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        }
+    </script>
+</body>
+</html>

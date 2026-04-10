@@ -1,0 +1,13 @@
+DATABASE AUDIT REPORT
+=========================
+STATUS: CONNECTED to local SQLite Fallback (MySQL is disconnected)
+URI CHECKED: localhost:3306/ai_detector_db
+
+--- USER ACCOUNTS ---
+ID    | USERNAME             | ROLE      
+---------------------------------------------
+1     | phani                | admin     
+2     | chari                | user      
+3     | sak                  | user      
+4     | sai                  | user      
+5     | durga                | user      

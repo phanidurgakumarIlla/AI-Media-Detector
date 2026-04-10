@@ -1,0 +1,80 @@
+
+--- ERROR ---
+Traceback (most recent call last):
+  File "E:\AI Dect\backend\ml_engine.py", line 144, in analyze_media
+    final_ai_score, target_box, is_screen, moire_detected, algorithm_used = await asyncio.to_thread(_photo_ml_run)
+                                                                                                    ^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable '_photo_ml_run' where it is not associated with a value
+
+
+--- ERROR ---
+Traceback (most recent call last):
+  File "E:\AI Dect\backend\ml_engine.py", line 141, in analyze_media
+    final_ai_score, target_box, is_screen, moire_detected, algorithm_used = await asyncio.to_thread(_fetch_and_run)
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "E:\AI Dect\backend\ml_engine.py", line 140, in _fetch_and_run
+    return _run_ml_on_image(img)
+  File "E:\AI Dect\backend\ml_engine.py", line 523, in _run_ml_on_image
+    return 0.88, target_box, is_screen, moire_detected, "Spectral Feature Detection"
+                                        ^^^^^^^^^^^^^^
+NameError: name 'moire_detected' is not defined
+
+
+--- ERROR ---
+Traceback (most recent call last):
+  File "E:\AI Dect\backend\ml_engine.py", line 141, in analyze_media
+    final_ai_score, target_box, is_screen, moire_detected, algorithm_used = await asyncio.to_thread(_fetch_and_run)
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "E:\AI Dect\backend\ml_engine.py", line 140, in _fetch_and_run
+    return _run_ml_on_image(img)
+  File "E:\AI Dect\backend\ml_engine.py", line 523, in _run_ml_on_image
+    return 0.88, target_box, is_screen, moire_detected, "Spectral Feature Detection"
+                                        ^^^^^^^^^^^^^^
+NameError: name 'moire_detected' is not defined
+
+
+--- ERROR ---
+Traceback (most recent call last):
+  File "E:\AI Dect\backend\ml_engine.py", line 151, in analyze_media
+    final_ai_score, target_box, is_screen, moire_detected, algorithm_used = await asyncio.to_thread(_fetch_and_run)
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "E:\AI Dect\backend\ml_engine.py", line 150, in _fetch_and_run
+    return _run_ml_on_image(img)
+  File "E:\AI Dect\backend\ml_engine.py", line 533, in _run_ml_on_image
+    return 0.88, target_box, is_screen, moire_detected, "Spectral Feature Detection"
+                                        ^^^^^^^^^^^^^^
+NameError: name 'moire_detected' is not defined
+
+
+--- ERROR ---
+Traceback (most recent call last):
+  File "E:\AI Dect\backend\ml_engine.py", line 162, in analyze_media
+    final_ai_score, target_box, is_screen, moire_detected, algorithm_used = await asyncio.to_thread(_fetch_and_run)
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "E:\AI Dect\backend\ml_engine.py", line 161, in _fetch_and_run
+    return _run_ml_on_image(img)
+  File "E:\AI Dect\backend\ml_engine.py", line 540, in _run_ml_on_image
+    return 0.88, target_box, is_screen, moire_detected, "Auto Ensemble (Texture Analysis)"
+                                        ^^^^^^^^^^^^^^
+NameError: name 'moire_detected' is not defined
+

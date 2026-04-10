@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Media Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_v2.css">
+    <script>
+        // Apply theme immediately to prevent layout shift
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+    <!-- Start hidden until token verified -->
+    <script>
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'intro.html';
+        }
+    </script>
+    <div style="display: none;" id="app-content">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+
+        <main class="animate-slide-up">
+
+            <header>
+                <div class="user-nav">
+                    <a id="btn-admin-panel" href="admin.html" class="btn primary-gradient btn-sm hidden">Admin Panel</a>
+                    <button id="btn-logout" class="btn primary-gradient btn-sm">Sign Out</button>
+                </div>
+                <h1>AI Media Detector</h1>
+                <p>Instantly determine if photos, videos, audio, or Instagram Reels are real or AI-generated.</p>
+            </header>
+
+            <!-- Main Input Container + Robot Layout -->
+            <div class="main-page-layout">
+                <div id="input-container" class="glass-panel">
+                    <div class="tabs">
+                        <button id="tab-upload" class="tab-btn active">Upload File</button>
+                        <button id="tab-instagram" class="tab-btn">Instagram Link</button>
+                        <button id="tab-youtube" class="tab-btn">YouTube Link</button>
+                    </div>
+
+                    <!-- Global Algorithm Selector (Shared across all tabs) -->
+                    <div class="algo-selection-area">
+                        <h4>Step 1: Choose Detection Strategy</h4>
+                        <div class="algo-grid">
+                            <label class="algo-card active">
+                                <input type="radio" name="algo-global" value="auto" checked>
+                                <span class="algo-name">Auto Cascade ✨</span>
+                                <p>Automated best-of-all approach (ML + Heuristics).</p>
+                            </label>
+                            <label class="algo-card">
+                                <input type="radio" name="algo-global" value="keyword">
+                                <span class="algo-name">Keyword Tag 🏷️</span>
+                                <p>Strict metadata-based text heuristics only.</p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sections Wrapper -->
+                    <div class="sections-wrapper">
+                        <!-- Upload Section -->
+                        <div id="section-upload" class="section active">
+                            <div id="drop-zone" class="drop-zone">
+                                <div class="icon">☁️</div>
+                                <h3 id="file-name">Drag & Drop your media here</h3>
+                                <p id="file-size">We support any Video, Audio, or Photo</p>
+                                <input type="file" id="file-input" accept="video/*,audio/*,image/*" hidden>
+                            </div>
+                            <button id="btn-analyze-upload" class="btn w-full" disabled>Analyze Upload</button>
+                        </div>
+
+                <!-- Instagram Section -->
+                <div id="section-instagram" class="section hidden">
+                    <div class="input-group">
+                        <h3>Paste Instagram Link</h3>
+                        <p>Enter a public Instagram Reel URL to analyze.</p>
+                        <div class="url-wrapper">
+                            <span class="url-icon">📷</span>
+                            <input type="url" id="url-instagram" placeholder="https://instagram.com/reel/..." required>
+                        </div>
+                    </div>
+                    <button id="btn-analyze-instagram" class="btn w-full">Analyze Instagram</button>
+                </div>
+
+                <!-- YouTube Section -->
+                <div id="section-youtube" class="section hidden">
+                    <div class="input-group">
+                        <h3>Paste YouTube Link</h3>
+                        <p>Enter a public YouTube URL to analyze.</p>
+                        <div class="url-wrapper">
+                            <span class="url-icon">🎥</span>
+                            <input type="url" id="url-youtube" placeholder="https://youtube.com/watch?v=..." required>
+                        </div>
+                    </div>
+                    <button id="btn-analyze-youtube" class="btn w-full">Analyze YouTube</button>
+                </div>
+                </div>
+
+                <div id="error-message" class="error-msg hidden"></div>
+            </div>
+
+            <!-- AI Robot Panel (Right Side) -->
+            <div class="robot-container main-robot-panel">
+                <div class="robot" id="main-robot">
+                    <div class="robot-head">
+                        <div class="robot-face">
+                            <div class="robot-eye left"><div class="eye-pupil"></div></div>
+                            <div class="robot-eye right"><div class="eye-pupil"></div></div>
+                        </div>
+                    </div>
+                    <div class="robot-body">
+                        <div class="robot-chest"></div>
+                        <div class="robot-arm left"></div>
+                        <div class="robot-arm right"></div>
+                    </div>
+                </div>
+                <p style="text-align:center; color:var(--text-secondary); font-size:0.8rem; margin-top:1rem;">AI Assistant — Watching your upload 👀</p>
+            </div>
+            </div><!-- end main-page-layout -->
+
+            <!-- Loading State -->
+            <div id="loading-container" class="glass-panel hidden text-center">
+                <div class="loader"></div>
+                <h2>Analyzing Media...</h2>
+                <p>Our AI is scanning for deepfake artifacts and compression anomalies.</p>
+            </div>
+
+            <!-- Results State -->
+            <div id="result-container" class="glass-panel hidden text-center animate-slide-up">
+                <h2>Analysis Complete</h2>
+
+                <!-- Algorithm Badge -->
+                <!-- Simplified Result View (Phase 31 Final) -->
+                <div id="verdict-box" class="verdict-box centered" style="margin-bottom: 2rem;">
+                    <h1 id="verdict-heading" style="font-size: 2.5rem; margin-bottom: 1rem;">Verdict</h1>
+                    <p id="verdict-details" style="font-size: 1.2rem; opacity: 0.9;">Details</p>
+                </div>
+
+                <!-- NEW: Forensic Heatmap Toggle Button (Phase 28) -->
+                <button id="btn-view-heatmap" class="btn" style="margin-bottom: 2rem; border-color: #00ffff; color: #00ffff; background: rgba(0,255,255,0.1); width: 100%;">
+                    🔍 View Detailed Forensic Heatmap
+                </button>
+
+                <!-- NEW: Forensic Heatmap Display (Phase 28) -->
+                <div id="forensic-heatmap-container" class="hidden animate-slide-up" style="margin-bottom: 2.5rem; border: 1px solid var(--accent-secondary); padding: 1.5rem; border-radius: 12px; background: rgba(0,0,0,0.2);">
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">🔍 Forensic Heatmap (ELA/DCT Variance)</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1.5rem; opacity: 0.8;">Color-coded hotspots (Red/Yellow) indicate potential manipulation regions.</p>
+                    <div style="position: relative; display: inline-block;">
+                        <img id="forensic-heatmap-img" src="" alt="Forensic Heatmap" style="max-width: 100%; border-radius: 8px; box-shadow: 0 0 15px rgba(0,255,255,0.3);">
+                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; color: #fff;">HYPER-PRECISION SCAN</div>
+                    </div>
+                </div>
+
+                <!-- NEW: Toggle for Advanced Stats -->
+                <button id="btn-toggle-advanced" class="btn outline" style="margin-bottom: 2rem; border-color: var(--accent-secondary); color: var(--accent-secondary);">
+                    📊 Show Advanced Forensic Analytics
+                </button>
+
+                <!-- RESTORED: Advanced Stats Container (Hidden by Default) -->
+                <div id="advanced-stats-container" class="hidden animate-slide-up" style="border-top: 1px solid var(--glass-border); padding-top: 2rem; margin-top: 1rem;">
+                    
+                    <div class="confidence-stats" style="margin-bottom: 3rem;">
+                        <div class="stat-left">
+                            <p>AI Prob.</p>
+                            <strong id="ai-conf" style="color: var(--danger); font-size: 1.5rem;">0%</strong>
+                        </div>
+                        <div class="stat-right">
+                            <p>Real Prob.</p>
+                            <strong id="real-conf" style="color: var(--success); font-size: 1.5rem;">0%</strong>
+                        </div>
+                    </div>
+
+                    <!-- Performance Analysis Side-by-Side -->
+                    <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+                        <h3 style="color: var(--accent-secondary); margin-bottom: 0.5rem; text-align: left;">📈 Performance Analysis Benchmarks</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: left;">Comparative evaluation of current detection strategies.</p>
+                    </div>
+
+                    <div class="metrics-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; text-align: left;">
+                        <!-- Pillar 1: Machine Learning -->
+                        <div class="stats-pillar">
+                            <h4 style="color: var(--accent-primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                                🧠 Deep Learning (ViT)
+                                <span style="font-size: 0.7rem; background: rgba(138,43,226,0.2); padding: 2px 8px; border-radius: 10px;">Primary</span>
+                            </h4>
+                            
+                            <div class="metric-group" style="display: flex; flex-direction: column; gap: 1rem;">
+                                <!-- Accuracy -->
+                                <div class="chart-row">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                        <span>Accuracy</span>
+                                        <strong id="ml-acc-val">94%</strong>
+                                    </div>
+                                    <div style="height: 6px; background: var(--glass-border); border-radius: 5px; overflow: hidden; margin-top: 4px;">
+                                        <div id="ml-acc-bar" style="height: 100%; width: 94%; background: #a29bfe;"></div>
+                                    </div>
+                                </div>
+                                <!-- Precision/Recall/F1 -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 5px; text-align: center;">
+                                    <div style="background: rgba(255,255,255,0.05); padding: 5px; border-radius: 5px;">
+                                        <small style="display:block; opacity: 0.6; font-size: 0.7rem;">Precision</small>
+                                        <strong id="ml-prec-val" style="font-size: 0.9rem;">92%</strong>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); padding: 5px; border-radius: 5px;">
+                                        <small style="display:block; opacity: 0.6; font-size: 0.7rem;">Recall</small>
+                                        <strong id="ml-rec-val" style="font-size: 0.9rem;">93%</strong>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); padding: 5px; border-radius: 5px;">
+                                        <small style="display:block; opacity: 0.6; font-size: 0.7rem;">F1-Score</small>
+                                        <strong id="ml-f1-val" style="font-size: 0.9rem;">92%</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 1.5rem;">
+                                <small style="display:block; margin-bottom: 0.5rem; opacity: 0.7;">Confusion Matrix (ML)</small>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.8rem;">
+                                    <div style="background: rgba(0,230,118,0.1); padding: 5px; border-radius: 4px;">TP: <span id="ml-tp">470</span></div>
+                                    <div style="background: rgba(255,23,68,0.1); padding: 5px; border-radius: 4px;">FP: <span id="ml-fp">40</span></div>
+                                    <div style="background: rgba(255,23,68,0.1); padding: 5px; border-radius: 4px;">FN: <span id="ml-fn">35</span></div>
+                                    <div style="background: rgba(0,230,118,0.1); padding: 5px; border-radius: 4px;">TN: <span id="ml-tn">455</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 2: Keyword Heuristic -->
+                        <div class="stats-pillar">
+                            <h4 style="color: #f59e0b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                                🏷️ Keyword Heuristic
+                                <span style="font-size: 0.7rem; background: rgba(245,158,11,0.2); padding: 2px 8px; border-radius: 10px;">Fast Scan</span>
+                            </h4>
+                            
+                            <div class="metric-group" style="display: flex; flex-direction: column; gap: 1rem;">
+                                <!-- Accuracy -->
+                                <div class="chart-row">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                        <span>Accuracy</span>
+                                        <strong id="kw-acc-val">85%</strong>
+                                    </div>
+                                    <div style="height: 6px; background: var(--glass-border); border-radius: 5px; overflow: hidden; margin-top: 4px;">
+                                        <div id="kw-acc-bar" style="height: 100%; width: 85%; background: #f59e0b;"></div>
+                                    </div>
+                                </div>
+                                <!-- Precision/Recall/F1 -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 5px; text-align: center;">
+                                    <div style="background: rgba(255,255,255,0.05); padding: 5px; border-radius: 5px;">
+                                        <small style="display:block; opacity: 0.6; font-size: 0.7rem;">Precision</small>
+                                        <strong id="kw-prec-val" style="font-size: 0.9rem;">95%</strong>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); padding: 5px; border-radius: 5px;">
+                                        <small style="display:block; opacity: 0.6; font-size: 0.7rem;">Recall</small>
+                                        <strong id="kw-rec-val" style="font-size: 0.9rem;">75%</strong>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.05); padding: 5px; border-radius: 5px;">
+                                        <small style="display:block; opacity: 0.6; font-size: 0.7rem;">F1-Score</small>
+                                        <strong id="kw-f1-val" style="font-size: 0.9rem;">84%</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 1.5rem;">
+                                <small style="display:block; margin-bottom: 0.5rem; opacity: 0.7;">Confusion Matrix (Keyword)</small>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.8rem;">
+                                    <div style="background: rgba(0,230,118,0.1); padding: 5px; border-radius: 4px;">TP: <span id="kw-tp">380</span></div>
+                                    <div style="background: rgba(255,23,68,0.1); padding: 5px; border-radius: 4px;">FP: <span id="kw-fp">20</span></div>
+                                    <div style="background: rgba(255,23,68,0.1); padding: 5px; border-radius: 4px;">FN: <span id="kw-fn">120</span></div>
+                                    <div style="background: rgba(0,230,118,0.1); padding: 5px; border-radius: 4px;">TN: <span id="kw-tn">480</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-center" style="margin-top: 2rem;">
+                    <button id="btn-reset" class="btn primary-gradient" style="padding: 1rem 3rem; font-size: 1.1rem; box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);">Check Another Media 🔄</button>
+                </div>
+            </div>
+    </div>
+    </main>
+    </div>
+
+    <script src="script_v2.js?v=50"></script>
+
+    <!-- AI Guide Panel -->
+    <div id="ai-guide" class="guide-panel animate-slide-up">
+        <div class="guide-header">
+            <span class="guide-robot-mini">🤖</span>
+            <h5>AI Assistant Guidance</h5>
+        </div>
+        <div class="guide-content">
+            <p id="guide-text">Welcome! To get started, please select a detection tab above.</p>
+        </div>
+        <div class="guide-steps">
+            <div class="guide-dot active"></div>
+            <div class="guide-dot"></div>
+            <div class="guide-dot"></div>
+            <div class="guide-dot"></div>
+        </div>
+    </div>
+</body>
+
+</html>
