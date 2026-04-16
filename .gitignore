@@ -26,8 +26,12 @@ pyvenv.cfg
 # Env / Secrets
 .env
 .flaskenv
+token.txt
+Sample Data/
 
 # Project specific
+results/
+backend/model/
 backend/uploads/*
 backend/static/results/*
 frontend/node_modules/

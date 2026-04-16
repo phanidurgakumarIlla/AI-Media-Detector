@@ -176,10 +176,28 @@ header p {
 }
 
 .user-nav {
-    position: absolute;
-    top: 1rem;
-    right: 2rem;
-    z-index: 100;
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 2000;
+    display: flex;
+    gap: 0.8rem;
+}
+
+#btn-admin-panel {
+    background: #000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+}
+
+#btn-logout {
+    background: #bc13fe !important; /* Vibrant Purple */
+    color: white !important;
+    border: none !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(188, 19, 254, 0.3) !important;
 }
 
 .btn-sm {
@@ -740,9 +758,9 @@ input[type="url"]:focus {
     transform: scale(0.9);
 }
 
-/* Admin button - black text for visibility */
+/* Admin button - white text confirmed */
 [data-theme="dark"] #btn-admin-panel {
-    color: #000000 !important;
+    color: #ffffff !important;
 }
 
 /* Main Page Layout - side by side with robot */
