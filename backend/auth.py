@@ -296,3 +296,19 @@ def get_all_users(current_user: models.User = Depends(get_current_user), db: Ses
             "is_verified": bool(u.is_verified)
         } for u in users
     ]
+
+@router.get("/admin/stats")
+def get_admin_stats(current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """Restricted to admin role only. Returns real-time forensic counts."""
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Administrative privileges required to access analytics.")
+    
+    user_count = db.query(models.User).count()
+    scan_count = db.query(models.AnalysisResult).count()
+    
+    return {
+        "user_count": user_count,
+        "scan_count": scan_count,
+        "engine_status": "ACTIVE",
+        "version": "V2.1.0"
+    }

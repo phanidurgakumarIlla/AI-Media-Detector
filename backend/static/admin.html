@@ -359,11 +359,17 @@
                 document.getElementById('stat-users').textContent = 'FAILED';
             }
 
-            // Load extra stats (simulated for impact)
+            // Load real-time forensic stats from backend
             try {
-                // In a real app we'd fetch actual scan counts
-                document.getElementById('stat-scans').textContent = Math.floor(Math.random() * 1000) + 500;
-            } catch {}
+                const statsRes = await fetch('/auth/admin/stats', { headers: { 'Authorization': `Bearer ${token}` } });
+                if (statsRes.ok) {
+                    const stats = await statsRes.json();
+                    document.getElementById('stat-users').textContent = stats.user_count;
+                    document.getElementById('stat-scans').textContent = stats.scan_count;
+                }
+            } catch (err) {
+                console.error("Failed to load forensic stats:", err);
+            }
 
             // --- Mouse Cursor Tracking for Robot ---
             const robot = document.getElementById('admin-robot');
